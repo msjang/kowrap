@@ -45,6 +45,8 @@ Status keys:
 - [x] Add checked-in synthetic review label fixture.
 - [x] Switch candidate extraction to separator-boundary tokenization.
 - [x] Rebuild review set after expanding MSIT and evaluation.go.kr data.
+- [x] Generate 5+ candidate files without overwriting the 8+ comparison set.
+- [x] Generate core, long, stratified train seed, and lexicon seed review files.
 
 ## Next 72 Hours
 
@@ -54,7 +56,7 @@ Status keys:
 - [ ] Draft but do not publish W3C `klreq` issue.
 - [x] Create `docs/ip-open-source-strategy.md`.
 - [x] Create `docs/corpus/legal-text-pipeline.md`.
-- [ ] Review `~/kowrap/data/processed/candidates/review_context_top_500.tsv`.
+- [ ] Review `~/kowrap/data/processed/candidates/review_train_seed_500.tsv`.
 - [x] Add a human-labeling format for candidate break positions.
 
 ## Evidence Pack

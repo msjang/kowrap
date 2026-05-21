@@ -8,6 +8,17 @@ Current review set:
 
 - `~/kowrap/data/processed/candidates/review_context_top_500.tsv`
 
+Current 5+ review sets:
+
+- `~/kowrap/data/processed/candidates/review_train_seed_500.tsv`
+- `~/kowrap/data/processed/candidates/review_core_5plus_top_500.tsv`
+- `~/kowrap/data/processed/candidates/review_long_12plus_top_500.tsv`
+- `~/kowrap/data/processed/candidates/lexicon_seed_5to8_top_500.tsv`
+
+Recommended first file:
+
+- `review_train_seed_500.tsv`
+
 Checked-in format fixture:
 
 - `examples/review_labels_synthetic.tsv`

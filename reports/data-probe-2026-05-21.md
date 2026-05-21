@@ -160,6 +160,9 @@ Candidate length distribution after separator-boundary tokenization:
 This is the current best human-in-the-loop entry point. Labeling instructions are
 in `docs/annotation-guide.md`.
 
+The follow-up 5+ review-set pass is documented in
+`reports/review-sets-5plus-2026-05-21.md`.
+
 Export:
 
 - `scripts/kowrap_export_review_labels.py` converts reviewed TSV rows to JSONL.
