@@ -26,7 +26,8 @@ Status keys:
 - [x] Fix public project license: Apache-2.0.
 - [x] Create `docs/decision-queue.md` for owner decisions vs autonomous work.
 - [x] Initialize local Git repository.
-- [x] Set `origin` to private GitHub repo `https://github.com/msjang/kowrap.git`.
+- [x] Set `origin` to private GitHub repo `git@github.com:msjang/kowrap.git`.
+- [x] Push initial commit to private GitHub repo.
 - [x] Set collaboration target priority: KONI first.
 - [x] Set initial data strategy: public legal text and synthetic examples first.
 
