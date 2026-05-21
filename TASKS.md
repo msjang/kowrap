@@ -33,10 +33,16 @@ Status keys:
 - [x] Create external data workspace under `~/kowrap`.
 - [x] Clone `OctopusET/msit-dl` and `OctopusET/streamdoc-dl` under `~/kowrap/tools`.
 - [x] Download MSIT page-1 HWP/HWPX/ODT attachments.
+- [x] Expand MSIT download to pages 2-3.
 - [x] Fetch 15 seed science/ICT law bodies from law.go.kr.
 - [x] Download and extract one evaluation.go.kr PDF sample.
 - [x] Add text extraction and candidate extraction scripts.
 - [x] Generate first candidate files under `~/kowrap/data/processed/candidates`.
+- [x] Download and extract a 20-PDF evaluation.go.kr batch.
+- [x] Generate `review_context_top_500.tsv` with source context and label fields.
+- [x] Create `docs/annotation-guide.md` for first-pass break labels.
+- [x] Add reviewed-label TSV-to-JSONL export script.
+- [x] Add checked-in synthetic review label fixture.
 
 ## Next 72 Hours
 
@@ -46,8 +52,8 @@ Status keys:
 - [ ] Draft but do not publish W3C `klreq` issue.
 - [x] Create `docs/ip-open-source-strategy.md`.
 - [x] Create `docs/corpus/legal-text-pipeline.md`.
-- [ ] Review `~/kowrap/data/processed/candidates/review_top_200.tsv`.
-- [ ] Add a human-labeling format for candidate break positions.
+- [ ] Review `~/kowrap/data/processed/candidates/review_context_top_500.tsv`.
+- [x] Add a human-labeling format for candidate break positions.
 
 ## Evidence Pack
 
@@ -71,7 +77,8 @@ Status keys:
 - [x] Define how to mark private/internal examples without exposing original text.
 - [ ] Add character-offset fields after annotation tooling exists.
 - [ ] Add renderer context fields to visual benchmark examples.
-- [ ] Create annotation guide for human labelers.
+- [x] Create annotation guide for human labelers.
+- [x] Add initial TSV-to-JSONL label exporter.
 - [x] Create synthetic examples for legal, science, policy, and report style.
 - [ ] Define legal-text candidate extraction fields.
 - [x] Define seed legal text list in `data/legal_seed_laws.txt`.
@@ -84,6 +91,7 @@ Status keys:
 - [ ] Implement baseline 4: morphology-based break opportunities.
 - [ ] Implement baseline 5: PMI/branching-entropy score.
 - [ ] Define combined score interface.
+- [ ] Prototype semantic-preserving microcompression cost.
 - [ ] Define model export format for future lightweight model versions.
 
 ## Renderer Harness
@@ -94,6 +102,7 @@ Status keys:
 - [ ] Build PDF rendering harness.
 - [ ] Decide how much HWPX rendering is in scope for v0.
 - [ ] Define visual diff metrics.
+- [ ] Test letter-spacing and glyph-width safety bands across fonts/renderers.
 
 ## Open Source
 

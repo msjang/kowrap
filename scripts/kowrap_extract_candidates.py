@@ -72,7 +72,9 @@ def main() -> None:
             if len(sources[token]) < 20:
                 sources[token].add(str(path))
 
-    ranked = sorted(counts.items(), key=lambda item: (-len(item[0]), -item[1], item[0]))
+    ranked = sorted(
+        counts.items(), key=lambda item: (-hangul_count(item[0]), -item[1], item[0])
+    )
     if args.top:
         ranked = ranked[: args.top]
 
