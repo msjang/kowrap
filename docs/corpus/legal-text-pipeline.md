@@ -29,6 +29,8 @@ Prefer official sources:
 
 The open API guide documents law search APIs and result fields such as law id, title, ministry, promulgation date, enforcement date, and detail links.
 
+Current note: the sample `OC=test` API key can fail with IP/domain validation. KOWRAP therefore also supports a no-key fallback for named laws: `https://www.law.go.kr/법령/{법령명}` is opened, the `lawService` iframe is followed, and the body HTML is fetched via `lsInfoR.do`.
+
 ## Phase 1: Candidate Mining
 
 For each law:
@@ -107,3 +109,17 @@ The API sign-up page notes that an API key is used as the `OC` request parameter
 - Keep derived labels separate from raw source text.
 - Record extraction date and source link.
 
+## Current Seed Run
+
+Seed list:
+
+- `data/legal_seed_laws.txt`
+
+External outputs:
+
+- raw HTML: `~/kowrap/data/raw/law/seed_laws`
+- extracted text: `~/kowrap/data/processed/text/law_seed`
+- candidates: `~/kowrap/data/processed/candidates/law_seed_candidates.jsonl`
+- review sheet: `~/kowrap/data/processed/candidates/review_top_200.tsv`
+
+As of 2026-05-21, the seed run fetched 15/15 laws and produced 1,000 ranked legal candidates after filtering obvious 조문번호-style noise.

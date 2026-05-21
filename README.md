@@ -23,6 +23,7 @@ Public code, documentation, and project-authored synthetic examples are licensed
 - [docs/evidence-pack.md](docs/evidence-pack.md): rendered evidence and evidence template.
 - [docs/ip-open-source-strategy.md](docs/ip-open-source-strategy.md): Apache-2.0 and institutional IP strategy note.
 - [docs/corpus/legal-text-pipeline.md](docs/corpus/legal-text-pipeline.md): public legal text mining workflow.
+- [reports/data-probe-2026-05-21.md](reports/data-probe-2026-05-21.md): first MSIT/evaluation/law data probe.
 - [docs/adr/0001-project-operating-system.md](docs/adr/0001-project-operating-system.md): first architecture/process decision.
 - [docs/adr/0002-data-boundary.md](docs/adr/0002-data-boundary.md): data disclosure boundary decision.
 - [docs/adr/0003-evidence-first-before-ml.md](docs/adr/0003-evidence-first-before-ml.md): evidence-first research strategy.
@@ -38,3 +39,7 @@ Rendered images from `2026_0518_krigf_partial.pdf`:
 ## Seed Dataset
 
 - [examples/wrapping_failures.jsonl](examples/wrapping_failures.jsonl): synthetic public examples for early schema and benchmark work.
+
+## Data Workspace
+
+Bulk crawled and extracted data lives outside this repository at `~/kowrap`.

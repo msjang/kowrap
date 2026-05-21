@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Keep bulk/raw corpora outside this repository.
+/local-data/

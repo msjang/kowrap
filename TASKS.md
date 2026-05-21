@@ -30,6 +30,13 @@ Status keys:
 - [x] Push initial commit to private GitHub repo.
 - [x] Set collaboration target priority: KONI first.
 - [x] Set initial data strategy: public legal text and synthetic examples first.
+- [x] Create external data workspace under `~/kowrap`.
+- [x] Clone `OctopusET/msit-dl` and `OctopusET/streamdoc-dl` under `~/kowrap/tools`.
+- [x] Download MSIT page-1 HWP/HWPX/ODT attachments.
+- [x] Fetch 15 seed science/ICT law bodies from law.go.kr.
+- [x] Download and extract one evaluation.go.kr PDF sample.
+- [x] Add text extraction and candidate extraction scripts.
+- [x] Generate first candidate files under `~/kowrap/data/processed/candidates`.
 
 ## Next 72 Hours
 
@@ -39,6 +46,8 @@ Status keys:
 - [ ] Draft but do not publish W3C `klreq` issue.
 - [x] Create `docs/ip-open-source-strategy.md`.
 - [x] Create `docs/corpus/legal-text-pipeline.md`.
+- [ ] Review `~/kowrap/data/processed/candidates/review_top_200.tsv`.
+- [ ] Add a human-labeling format for candidate break positions.
 
 ## Evidence Pack
 
@@ -65,6 +74,7 @@ Status keys:
 - [ ] Create annotation guide for human labelers.
 - [x] Create synthetic examples for legal, science, policy, and report style.
 - [ ] Define legal-text candidate extraction fields.
+- [x] Define seed legal text list in `data/legal_seed_laws.txt`.
 
 ## Algorithms
 
