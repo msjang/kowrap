@@ -16,6 +16,7 @@ Public code, documentation, and project-authored synthetic examples are licensed
 - [ROADMAP.md](ROADMAP.md): phased plan across paper, patent, standardization, and code.
 - [TASKS.md](TASKS.md): current atomic task list.
 - [WORKFLOW.md](WORKFLOW.md): how to run the project day to day.
+- [docs/break-selection.md](docs/break-selection.md): semantic and renderer-aware candidate selection.
 - [docs/glossary.md](docs/glossary.md): shared Korean/English terminology.
 - [docs/data-schema.md](docs/data-schema.md): JSONL schema for early examples and benchmarks.
 - [docs/data-boundary.md](docs/data-boundary.md): public, restricted, and private data rules.

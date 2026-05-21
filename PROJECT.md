@@ -85,7 +85,8 @@ W3C의 Korean Layout Requirements 문서는 한국어 조판 요구사항을 정
 - RQ2: `keep-all`, 음절 단위 분절, 수동 `<br>`, 자간 조절 대비 제안 모델은 시각적 품질과 편집 비용을 얼마나 줄이는가?
 - RQ3: HWPX/PDF/Web 렌더러 차이를 흡수하는 최소 공통 표현은 무엇인가?
 - RQ4: 기관별 용어와 문체에 맞춘 모델을 어떻게 버전 관리하고 교체할 수 있는가?
-- RQ5: 표준 문서가 받아들일 수 있는 테스트 케이스와 요구사항 문장으로 어떻게 환원할 수 있는가?
+- RQ5: 여러 내부 줄바꿈 후보가 있을 때 의미 점수, 남은 줄 폭, 자간/장평 조정 비용, 다음 줄 영향을 결합해 어떤 후보를 선택해야 하는가?
+- RQ6: 표준 문서가 받아들일 수 있는 테스트 케이스와 요구사항 문장으로 어떻게 환원할 수 있는가?
 
 ## Expected Outputs
 
@@ -126,6 +127,29 @@ Until the institutional IP boundary is clarified, public materials should emphas
 3. HWPX adapter: HWPX 문서의 문단 텍스트와 스타일을 읽어 줄바꿈 위험 지점을 리포트한다.
 4. Benchmark runner: 여러 렌더러와 폰트 조합에서 PNG/PDF 결과를 비교한다.
 
+## Algorithmic Core
+
+KOWRAP separates Korean compound wrapping into two layers.
+
+Layer 1 scores word-internal break candidates. For `과학기술유공자`, candidates include `과학|기술유공자` and `과학기술|유공자`. The latter is normally preferred because `과학기술` is a strong compound and `유공자` is a natural unit.
+
+Layer 2 chooses the actual line break under renderer constraints. If the current line has enough width for `과학기술`, KOWRAP can choose `과학기술\n유공자`. If only `과학` fits, KOWRAP should compare earlier line breaks, moving the whole eojeol to the next line, small 자간/장평 adjustment, and the weaker `과학\n기술유공자` option.
+
+One explicit subproblem is semantic-preserving microcompression. If the renderer would otherwise produce `과학기|술유공자`, KOWRAP can compare the cost of the bad semantic split with the cost of a small negative letter-spacing or modest glyph-width reduction that permits `과학기술|유공자`.
+
+The line-level decision minimizes:
+
+```text
+total_cost =
+  layout_badness
++ semantic_break_penalty
++ typography_adjustment_penalty
++ lookahead_penalty
++ renderer_instability_penalty
+```
+
+Details live in `docs/break-selection.md`.
+
 ## Model Versioning
 
 모델은 알고리즘과 말뭉치의 시간성을 분리해 관리한다.
@@ -148,6 +172,9 @@ Until the institutional IP boundary is clarified, public materials should emphas
 
 - Break accuracy: 사람이 표시한 안전 분절 지점과의 precision, recall, F1.
 - Bad break rate: 의미적으로 부적절한 위치에서 줄이 끊긴 비율.
+- Preferred break accuracy: 여러 후보 중 사람이 선호한 의미 단위 후보를 고른 비율.
+- Layout-aware choice quality: 남은 폭과 다음 줄 영향을 고려했을 때 총비용이 낮은 후보를 선택한 비율.
+- Microcompression benefit: 의미 보존을 위해 제한된 자간/장평 축소를 사용했을 때 bad break가 얼마나 줄어드는지.
 - Layout stability: 폰트, 폭, 렌더러 변화에 따른 줄바꿈 edit distance.
 - Visual quality: 과도한 공백, 자간 압축, 표 영역 넘침, widows/orphans.
 - Human effort: 수동 `<br>`, 자간 조정, 폰트 변경 횟수.

@@ -46,6 +46,7 @@ Deliverables:
   - syllable break
   - morpheme analyzer heuristic
   - PMI/branching entropy statistical score
+- Break candidate scoring and layout-aware selection design.
 - Renderer harness plan for Web/PDF/HWPX comparison.
 - First benchmark report using at least 100 examples.
 
@@ -191,4 +192,3 @@ Material to hold until review:
 - Model compression mechanism
 - Domain adaptation method
 - Render-aware optimization loop
-
