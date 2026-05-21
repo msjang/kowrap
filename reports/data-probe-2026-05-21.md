@@ -32,13 +32,14 @@ python3 ~/kowrap/tools/msit-dl/msit_dl.py --pages 1 --outdir ~/kowrap/data/raw/m
 Result:
 
 - downloaded recent MSIT page-1 HWP/HWPX/ODT attachments
-- expanded to pages 2-3; 19 additional HWP/HWPX/ODT sets were saved
-- extracted text from 49 HWPX and ODT files
+- expanded to pages 8
+- current raw files: 60 HWP, 61 HWPX, 60 ODT
+- extracted text from 121 HWPX and ODT files
 - generated `~/kowrap/data/processed/candidates/msit_candidates.jsonl`
 
 Candidate count:
 
-- 325
+- 673
 
 ## Evaluation.go.kr
 
@@ -59,13 +60,12 @@ Sample:
 
 Batch expansion:
 
-- downloaded 20/20 PDFs from the menu page into `~/kowrap/data/raw/evaluation/pdfs`
-- extracted 20/20 PDFs into `~/kowrap/data/processed/text/evaluation_batch`
-- extracted text line count: 123,721 total lines
+- downloaded 50/50 PDFs from the menu page into `~/kowrap/data/raw/evaluation/pdfs`
+- extracted 50/50 PDFs into `~/kowrap/data/processed/text/evaluation_batch`
 
 Candidate count after batch expansion:
 
-- 1,160
+- 3,399
 
 Usefulness:
 
@@ -97,7 +97,7 @@ Result:
 
 Candidate count:
 
-- 1,000, capped by `--top 1000`
+- 1,042
 
 Usefulness:
 
@@ -105,6 +105,13 @@ Usefulness:
 - Needs filtering for enumerations, agency lists, and suffix particles.
 
 ## Combined Review Sheet
+
+Tokenizer policy:
+
+- Separators such as `·`, `ㆍ`, `_`, and `-` are token boundaries, not characters
+  to delete.
+- `candidate` must be an observed surface token from the extracted text.
+- The top 100 review rows were checked as direct matches in their `context_path`.
 
 Created:
 
@@ -133,16 +140,22 @@ Columns:
 
 Review-set distribution:
 
-- law: 293 rows
-- evaluation: 137 rows
-- msit: 70 rows
+- evaluation: 349 rows
+- law: 87 rows
+- msit: 64 rows
 
 Type-hint distribution:
 
-- compound: 472 rows
-- law-title: 14 rows
-- agency-list: 11 rows
-- enumeration: 3 rows
+- compound: 486 rows
+- law-title: 13 rows
+- agency-list: 1 row
+
+Candidate length distribution after separator-boundary tokenization:
+
+- total candidates: 5,114
+- Hangul length >= 20: 21
+- Hangul length >= 16: 116
+- Hangul length >= 12: 608
 
 This is the current best human-in-the-loop entry point. Labeling instructions are
 in `docs/annotation-guide.md`.
@@ -156,7 +169,6 @@ Export:
 
 ## Next Improvements
 
-- Improve type hints for source-extraction enumerations and collapsed bullet lists.
+- Improve type hints for source-extraction sentence fragments and collapsed table cells.
 - Add scoring fields for preferred, acceptable, and protected break candidates.
-- Crawl more MSIT pages after confirming rate limits.
 - Crawl more evaluation.go.kr PDFs by metadata, not blindly.

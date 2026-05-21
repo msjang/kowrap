@@ -40,6 +40,13 @@ PARTICLE_SUFFIXES = [
 ]
 
 
+NOISY_EXTRACTION_RE = re.compile(
+    r"([0-9]+여년간|월까지의|"
+    r"하면서|하였으며|하였고|하였다|하였음|기여함|있으며|되었으며|"
+    r"개선하였|노력하였|추진하였)"
+)
+
+
 def guess_stem_suffix(candidate: str) -> tuple[str, str]:
     for suffix in PARTICLE_SUFFIXES:
         if candidate.endswith(suffix) and len(candidate) > len(suffix) + 2:
@@ -49,6 +56,8 @@ def guess_stem_suffix(candidate: str) -> tuple[str, str]:
 
 def type_guess(candidate: str) -> str:
     stem, _ = guess_stem_suffix(candidate)
+    if NOISY_EXTRACTION_RE.search(candidate):
+        return "noisy-extraction"
     if re.fullmatch(r"제[0-9가-힣의]+[조항호][0-9가-힣의조항호]*", candidate):
         return "article-reference"
     if stem.endswith(("법률", "특별법", "기본법", "진흥법", "전파법", "전자정부법")):
@@ -69,6 +78,18 @@ def type_guess(candidate: str) -> str:
     if re.search(r"(생산중지|수입중지|판매중지|사용중지){2,}", candidate):
         return "enumeration"
     return "compound"
+
+
+def sort_key(row: dict) -> tuple[int, int, int, str]:
+    candidate = row.get("candidate", "")
+    guessed_type = type_guess(candidate)
+    noisy_rank = 1 if guessed_type == "noisy-extraction" else 0
+    return (
+        noisy_rank,
+        -int(row.get("hangul_len", 0)),
+        -int(row.get("count", 0)),
+        candidate,
+    )
 
 
 def candidate_pattern(candidate: str) -> re.Pattern[str]:
@@ -125,13 +146,7 @@ def main() -> None:
         for row in read_candidates(args.inputs)
         if int(row.get("hangul_len", 0)) >= args.min_hangul
     ]
-    candidates.sort(
-        key=lambda row: (
-            -int(row.get("hangul_len", 0)),
-            -int(row.get("count", 0)),
-            row.get("candidate", ""),
-        )
-    )
+    candidates.sort(key=sort_key)
     candidates = candidates[: args.top]
 
     review_rows = []

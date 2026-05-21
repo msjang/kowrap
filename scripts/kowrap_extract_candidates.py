@@ -11,17 +11,12 @@ from pathlib import Path
 
 
 HANGUL_RE = re.compile(r"[가-힣]")
-TOKEN_RE = re.compile(r"[가-힣A-Za-z0-9ㆍ·_-]+")
+TOKEN_RE = re.compile(r"[가-힣A-Za-z0-9]+")
 TRIM_RE = re.compile(r"^[^가-힣A-Za-z0-9]+|[^가-힣A-Za-z0-9]+$")
 
 
-def normalize_token(token: str) -> str:
-    token = TRIM_RE.sub("", token)
-    token = token.replace("ㆍ", "")
-    token = token.replace("·", "")
-    token = token.replace("_", "")
-    token = token.replace("-", "")
-    return token
+def clean_token(token: str) -> str:
+    return TRIM_RE.sub("", token)
 
 
 def hangul_count(token: str) -> int:
@@ -40,7 +35,7 @@ def is_article_reference_noise(token: str) -> bool:
 def iter_tokens(text: str, min_hangul: int, keep_article_refs: bool) -> list[str]:
     result = []
     for match in TOKEN_RE.finditer(text):
-        token = normalize_token(match.group(0))
+        token = clean_token(match.group(0))
         if hangul_count(token) >= min_hangul:
             if not keep_article_refs and is_article_reference_noise(token):
                 continue
@@ -89,6 +84,7 @@ def main() -> None:
                 "count": count,
                 "source_class": args.source_class,
                 "license_note": "source terms pending; KOWRAP labels Apache-2.0 project-authored",
+                "tokenizer_version": "separator-boundary-v1",
                 "domain": args.domain,
                 "source_paths": sorted(sources[token]),
                 "safe_breaks": [],

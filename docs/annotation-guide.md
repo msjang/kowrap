@@ -18,6 +18,15 @@ kept outside this repository until source terms are reviewed. The KOWRAP labels
 created by project contributors are intended to be project-authored Apache-2.0
 data.
 
+## Tokenization Policy
+
+`candidate` is a surface token observed in extracted text. Separators such as
+`·`, `ㆍ`, `_`, and `-` are token boundaries. They must not be deleted to create a
+longer candidate.
+
+If a row exists only because document extraction collapsed spaces across a table
+cell or sentence, mark `label_status` as `skip` or `needs-discussion`.
+
 ## Columns To Edit
 
 Annotators should only edit these columns:
@@ -91,6 +100,7 @@ The generated `type_guess` is only a hint.
 - `agency-list`: ministry, committee, government body, or institution list.
 - `enumeration`: list-like token collapsed by source extraction.
 - `article-reference`: legal article or clause reference noise.
+- `noisy-extraction`: likely spacing loss from PDF/HWPX extraction.
 
 For `agency-list` and `enumeration`, good labels often preserve each named unit
 and place breaks at list boundaries. For `law-title`, the title itself is usually

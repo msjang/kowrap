@@ -43,6 +43,8 @@ Status keys:
 - [x] Create `docs/annotation-guide.md` for first-pass break labels.
 - [x] Add reviewed-label TSV-to-JSONL export script.
 - [x] Add checked-in synthetic review label fixture.
+- [x] Switch candidate extraction to separator-boundary tokenization.
+- [x] Rebuild review set after expanding MSIT and evaluation.go.kr data.
 
 ## Next 72 Hours
 
